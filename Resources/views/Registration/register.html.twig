@@ -1,0 +1,10 @@
+{% extends 'AvanzuProfileBundle::layout.html.twig' %}
+
+{% block avanzu_profile_body %}
+
+<form action="{{ path('profile_create')}}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+
+    <input type="submit" />
+</form>
+{%endblock%}

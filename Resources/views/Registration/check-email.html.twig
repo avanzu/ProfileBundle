@@ -1,0 +1,7 @@
+{% extends 'AvanzuProfileBundle::layout.html.twig' %}
+
+{% block avanzu_profile_body %}
+Fast geschafft, {{user.username}}! 
+Um Deinen Account zu bestätigen wurde eine E-Mail an {{user.email}} gesendet.<br/>
+In dieser E-Mail findest Du einen Link, den Du anklicken musst um deinen Account zu aktivieren.
+{%endblock%}

@@ -1,0 +1,12 @@
+{%block subject%}
+Wilkommen an Bord, {{user.username}}!
+{%endblock%}
+
+{%block body_text%}
+Hallo {{user.username}}, 
+
+bitte klicke auf den folgenden Link um dein Benutzerkonto zu aktivieren: 
+
+{{url('profile_activate', {'token': user.confirmationToken})}}
+
+{%endblock%}

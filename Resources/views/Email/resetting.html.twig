@@ -1,0 +1,12 @@
+{%block subject%}
+Passwort zurücksetzen, {{user.username}}!
+{%endblock%}
+
+{%block body_text%}
+Hallo {{user.username}}, 
+
+bitte klicke auf den folgenden Link um dein Passwort zurück zu setzen:
+
+{{url('reset_reset', {'token': user.confirmationToken})}}
+
+{%endblock%}

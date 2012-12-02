@@ -1,0 +1,84 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <!--
+    <parameters>
+        <parameter key="avanzu_profile.user_provider.class">Avanzu\ProfileBundle\Entity\UserRepository</parameter>
+    </parameters>
+
+    <services>
+        <service id="avanzu_profile.user_provider.username" class="%avanzu_profile.user_provider.class%">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+    </services>
+    -->
+    <parameters>
+        <parameter key="avanzu_profile.form.class.user">Avanzu\ProfileBundle\Form\Type\ProfileType</parameter>
+        <parameter key="avanzu_profile.form.class.registration">Avanzu\ProfileBundle\Form\Type\RegistrationType</parameter>
+        <parameter key="avanzu_profile.form.class.password">Avanzu\ProfileBundle\Form\Type\ChangePasswordType</parameter>
+        <parameter key="avanzu_profile.form.class.reset">Avanzu\ProfileBundle\Form\Type\ResetPasswordType</parameter>
+        <parameter key="avanzu_profile.usermanager.class">Avanzu\ProfileBundle\Manager\UserManager</parameter>
+        <parameter key="avanzu_profile.user_class"/>
+        
+        <parameter key="avanzu_profile.registration.doubleoptin">true</parameter>
+        
+        <parameter key="avanzu_profile.listener.doubleoptin.class">Avanzu\ProfileBundle\Listener\DoubleOptInListener</parameter>
+        <parameter key="avanzu_profile.listener.singleoptin.class">Avanzu\ProfileBundle\Listener\SingleOptInListener</parameter>
+    </parameters>
+    <services>
+        
+        <service id="avanzu_profile.form.type.user" class="%avanzu_profile.form.class.user%">
+            <tag name="form.type" alias="avanzu_profile_user" />
+        </service>
+        
+        <service id="avanzu_profile.form.type.registration" class="%avanzu_profile.form.class.registration%">
+            <tag name="form.type" alias="avanzu_profile_registration" />
+        </service>
+        
+        <service id="avanzu_profile.form.type.password" class="%avanzu_profile.form.class.password%">
+            <tag name="form.type" alias="avanzu_profile_changepassword" />
+        </service>
+        
+        <service id="avanzu_profile.form.type.reset" class="%avanzu_profile.form.class.reset%">
+            <tag name="form.type" alias="avanzu_profile_resetpassword" />
+        </service>
+        
+        <service id="avanzu_profile.usermanager" class="%avanzu_profile.usermanager.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" /> 
+            <argument type="service" id="event_dispatcher" /> 
+            <argument type="service" id="security.encoder_factory" /> 
+            <argument>%avanzu_profile.user_class%</argument>
+        </service>
+        
+        <service id="avanzu_profile.listener.doubleoptin" class="%avanzu_profile.listener.doubleoptin.class%">
+            <argument type="service" id="avanzu.tools.mailer" />
+            <argument>%avanzu_profile.registration.doubleoptin%</argument>
+            <tag name="kernel.event_listener" event="profile.created" method="onNewProfile" />
+        </service>
+        
+        <service id="avanzu_profile.listener.singleoptin" class="%avanzu_profile.listener.singleoptin.class%">
+            <argument type="service" id="avanzu_profile.usermanager" />
+            <argument>%avanzu_profile.registration.doubleoptin%</argument>
+            <tag name="kernel.event_listener" event="profile.created" method="onNewProfile" />
+        </service>
+        
+        <service id="avanzu_profile.listener.activation" class="Avanzu\ProfileBundle\Listener\ProfileActivationListener">
+            <argument type="service" id="security.context" />
+            <tag name="kernel.event_listener" event="profile.activated" method="onProfileActivated" />
+        </service>
+        
+        <service id="avanzu_profile.listener.resetting" class="Avanzu\ProfileBundle\Listener\ResetProfileListener">
+            <argument type="service" id="avanzu.tools.mailer" />
+            <tag name="kernel.event_listener" event="reset.initialized" method="onResetInitialized" />
+        </service>
+        
+        <service id="avanzu_profile.listener.login" class="Avanzu\ProfileBundle\Listener\InteractiveLoginListener">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <tag name="kernel.event_listener" event="security.interactive_login" method="onLogin" />
+        </service>
+        
+    </services>
+</container>

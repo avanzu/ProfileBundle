@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+
+{%block avanzu_profile_error%}
+
+{%if app.session.hasFlash('error')%}
+{{app.session.getFlash('error')}}
+{%endif%}
+{%endblock%} 
+        
+{%block avanzu_profile_success%}
+
+{%if app.session.hasFlash('success')%}
+{{app.session.getFlash('success')}}
+{%endif%}        
+{%endblock%}        
+        
+{% block avanzu_profile_body %}{%endblock%}
+
+
+</body>

@@ -1,0 +1,12 @@
+{% extends 'AvanzuProfileBundle::layout.html.twig' %}
+
+{% block avanzu_profile_body %}
+
+<form method="post" action="">
+    
+    <label for="nameoremail">{{'form.label.nameoremail'|trans({},'AvanzuProfile')}}</label>
+    <input type="text" name="name_or_email" id="nameoremail"/>
+    
+    <button type="submit">{{'button.label.resetPassword'|trans({}, 'AvanzuProfile')}}</button>
+</form>
+{%endblock%}

@@ -1,0 +1,8 @@
+{%extends 'AvanzuProfileBundle::layout.html.twig'%}
+{% block avanzu_profile_body %}
+{{user.username}} <br/>
+{{user.email}}
+
+<a href="{{path('profile_update')}}">Profil Bearbeiten</a>
+<a href="{{path('profile_change_password')}}">Passwort ändern</a>
+{%endblock%}

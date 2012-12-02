@@ -1,0 +1,11 @@
+{% extends 'AvanzuProfileBundle::layout.html.twig' %}
+
+{% block avanzu_profile_body %}
+
+<form method="post" action="">
+    
+    {{form_widget(form) }}
+    
+    <button type="submit">{{'button.label.resetPassword'|trans({}, 'AvanzuProfile')}}</button>
+</form>
+{%endblock%}

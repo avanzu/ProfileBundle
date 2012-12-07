@@ -1,0 +1,35 @@
+{
+    "name": "avanzu/profile-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony ProfileBundle",
+    "keywords": [],
+    "homepage": "https://github.com/avanzu/ProfileBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marc Bach",
+            "email": "mail@avanzu.de",
+            "homepage": "http://www.avanzu.de",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/framework-bundle": ">=2.1,<2.3-dev",
+        "symfony/security-bundle": ">=2.1,<2.3-dev"
+    },
+    "require-dev": {
+        "twig/twig": "*",
+        "doctrine/doctrine-bundle": "*",
+        "swiftmailer/swiftmailer": "*",
+        "willdurand/propel-typehintable-behavior": "dev-master",
+        "symfony/yaml": "2.1.*",
+        "symfony/validator": "2.1.*",
+        "avanzu/tools-bundle": "*"
+    },
+    "autoload": {
+        "psr-0": { "Avanzu\\ProfileBundle": "" }
+    },
+    "target-dir": "Avanzu/ProfileBundle"
+}

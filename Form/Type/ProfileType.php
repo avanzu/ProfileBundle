@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class UserType extends AbstractType {
+class ProfileType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
@@ -23,7 +23,7 @@ class UserType extends AbstractType {
     }
 
     public function getName() {
-        return 'avanzu_profile_user';
+        return 'avanzu_profile_profile';
     }
 
 }

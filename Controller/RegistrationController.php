@@ -49,7 +49,7 @@ class RegistrationController extends Controller {
                 return $this->getReturnUrl();
             }
             catch (\Exception $e) {
-                $this->get('session')->setFlash('error', $e->getMessage());
+                $this->get('session')->getFlashBag()->add('error', $e->getMessage());
             }
         }
 

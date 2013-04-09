@@ -36,7 +36,7 @@ class ProfileController extends Controller {
      */
     public function updateAction(Request $request) {
         $user = $this->getUser();
-        $form = $this->createForm('avanzu_profile_user', $user);
+        $form = $this->createForm('avanzu_profile_profile', $user);
         if ('POST' == $request->getMethod()) {
             
             $form->bind($request);
@@ -44,7 +44,7 @@ class ProfileController extends Controller {
                 $em = $this->getDoctrine()->getEntityManager(); 
                 $em->persist($user); 
                 $em->flush();
-                $this->get('session')->setFlash('success', 'User updated');
+                $this->get('session')->getFlashBag()->add('success', 'User updated');
                 return $this->redirect($this->generateUrl('profile_index'));
             }
             
@@ -74,7 +74,7 @@ class ProfileController extends Controller {
             $form->bind($request); 
             if ($form->isValid()) {
                 $manager->changePassword($user);
-                $this->get('session')->setFlash('success', 'password changed');
+                $this->get('session')->getFlashBag()->add('success', 'password changed');
                 return $this->redirect($this->generateUrl('profile_index'));
             }
         }

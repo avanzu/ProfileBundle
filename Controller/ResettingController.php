@@ -32,7 +32,7 @@ class ResettingController extends Controller {
             $manager->initializeReset($request->request->get('name_or_email'));
         }
         catch (\Exception $exc) {
-            $this->get('session')->setFlash('error', $exc->getMessage());
+            $this->get('session')->getFlashBag()->add('error', $exc->getMessage());
         }
         
         return array();
@@ -67,7 +67,7 @@ class ResettingController extends Controller {
             
             if($form->isValid()) {
                 $manager->resetPassword($user);
-                $this->get('session')->setFlash('success', 'password resetted');
+                $this->get('session')->getFlashBag()->add('success', 'password resetted');
                 return $this->redirect($this->generateUrl('login'));
             }
         }

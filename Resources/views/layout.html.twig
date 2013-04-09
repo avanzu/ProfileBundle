@@ -7,15 +7,19 @@
 
 {%block avanzu_profile_error%}
 
-{%if app.session.hasFlash('error')%}
-{{app.session.getFlash('error')}}
+{%if app.session.flashBag.has('error')%}
+{% for flash in app.session.flashBag.get('error')%}
+        {{flash}}
+{%endfor%}
 {%endif%}
 {%endblock%} 
         
 {%block avanzu_profile_success%}
 
-{%if app.session.hasFlash('success')%}
-{{app.session.getFlash('success')}}
+{%if app.session.flashBag.has('success')%}
+{% for flash in app.session.flashBag.get('success')%}
+        {{flash}}
+{%endfor%}
 {%endif%}        
 {%endblock%}        
         

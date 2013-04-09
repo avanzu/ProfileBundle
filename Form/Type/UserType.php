@@ -29,7 +29,7 @@ class UserType extends AbstractType {
     }
 
     public function getName() {
-        return 'avanzu_profile_usertype';
+        return 'avanzu_profile_user';
     }
 
 }

@@ -16,7 +16,8 @@
     </services>
     -->
     <parameters>
-        <parameter key="avanzu_profile.form.class.user">Avanzu\ProfileBundle\Form\Type\ProfileType</parameter>
+        <parameter key="avanzu_profile.form.class.profile">Avanzu\ProfileBundle\Form\Type\ProfileType</parameter>
+        <parameter key="avanzu_profile.form.class.user">Avanzu\ProfileBundle\Form\Type\UserType</parameter>
         <parameter key="avanzu_profile.form.class.registration">Avanzu\ProfileBundle\Form\Type\RegistrationType</parameter>
         <parameter key="avanzu_profile.form.class.password">Avanzu\ProfileBundle\Form\Type\ChangePasswordType</parameter>
         <parameter key="avanzu_profile.form.class.reset">Avanzu\ProfileBundle\Form\Type\ResetPasswordType</parameter>
@@ -32,6 +33,9 @@
         
         <service id="avanzu_profile.form.type.user" class="%avanzu_profile.form.class.user%">
             <tag name="form.type" alias="avanzu_profile_user" />
+        </service>
+        <service id="avanzu_profile.form.type.profile" class="%avanzu_profile.form.class.profile%">
+            <tag name="form.type" alias="avanzu_profile_profile" />
         </service>
         
         <service id="avanzu_profile.form.type.registration" class="%avanzu_profile.form.class.registration%">

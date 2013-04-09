@@ -1,7 +1,67 @@
 Avanzu Profile Bundle 
 =====================
 
+Create User Entity
+----------------------
+
+    use Doctrine\ORM\Mapping as ORM;
+    use Avanzu\ProfileBundle\Entity\User as BaseUser;
+    
+    /**
+     * @ORM\Entity()
+     */
+    class User extends BaseUser {}
+
+Create User Type
+----------------------
+
+    use Symfony\Component\Form\AbstractType;
+    use Symfony\Component\Form\FormBuilderInterface;
+    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
+    class UserType extends AbstractType
+    {
+        public function buildForm(FormBuilderInterface $builder, array $options)
+        {
+            $builder
+                ->add('username')
+                ->add('email')
+                ->add('plainPassword', 'repeated',
+                      array(
+                    'first_name'  => 'password',
+                    'second_name' => 'confirm',
+                    'type'        => 'password',
+                ));
+            ;
+        }
+
+        public function setDefaultOptions(OptionsResolverInterface $resolver)
+        {
+            $resolver->setDefaults(array(
+                'data_class' => 'Pma\CommonBundle\Entity\User'
+            ));
+        }
+
+        public function getName()
+        {
+            return 'avanzu_profile_user';
+        }
+    }
+
+------------------------------------------------
+
 Configuration: 
+=======================
+
+------------------------------------------------
+    #config.yml
+    avanzu_profile: 
+        user_class: Pma\CommonBundle\Entity\User
+        form:
+          class:
+            user: Pma\CommonBundle\Form\Type\UserType
+
+-------------------------------------------------
 
     # routing.yml 
     avanzu_profile_profile: 
@@ -34,7 +94,7 @@ Configuration:
 
     providers:
         avanzu_profile_bundle:
-            entity: { class: [your bundle and userclass], property: username }
+            entity: { class: __your bundle and userclass__, property: username }
 
     firewalls:
         main:
@@ -51,3 +111,5 @@ Configuration:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }        
+
+-------------------------------------------------

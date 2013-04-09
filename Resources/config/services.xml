@@ -71,6 +71,7 @@
         
         <service id="avanzu_profile.listener.activation" class="Avanzu\ProfileBundle\Listener\ProfileActivationListener">
             <argument type="service" id="security.context" />
+            <argument type="service" id="service_container" />
             <tag name="kernel.event_listener" event="profile.activated" method="onProfileActivated" />
         </service>
         

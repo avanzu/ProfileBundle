@@ -9,16 +9,11 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-//*  @ORM\Table(name="user_account")
-// *  @ORM\Entity(repositoryClass="Avanzu\ProfileBundle\Entity\UserRepository")
-
 /**
  * Avanzu\ProfileBundle\Entity\User
  *
  * @ORM\MappedSuperclass
  * 
- * @UniqueEntity(fields={"username"})
- * @UniqueEntity(fields={"email"})
  */
 class User implements AdvancedUserInterface, \Serializable, EquatableInterface {
 
@@ -31,31 +26,30 @@ class User implements AdvancedUserInterface, \Serializable, EquatableInterface {
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string $username
      *
      * @ORM\Column(name="username", type="string", length=50, nullable=false, unique=true)
      * @Assert\NotBlank()
-     * @Assert\MinLength(limit=3, message="user.username.minlength")
-     * @Assert\MaxLength(limit=50, message="user.usename.maxlength")
+     * @Assert\Length(min=3, minMessage="user.username.minlength", max=50, maxMessage="user.usename.maxlength")
      */
-    private $username;
+    protected $username;
 
     /**
      * @var string $salt
      *
      * @ORM\Column(name="salt", type="string", length=32)
      */
-    private $salt;
+    protected $salt;
 
     /**
      * @var string $password
      *
      * @ORM\Column(name="password", type="string", length=255)
      */
-    private $password;
+    protected $password;
 
     /**
      * @var string $email
@@ -64,43 +58,43 @@ class User implements AdvancedUserInterface, \Serializable, EquatableInterface {
      * @Assert\NotBlank()
      * @Assert\Email(checkMX=true)
      */
-    private $email;
+    protected $email;
 
     /**
      * @var boolean $isActive
      *
      * @ORM\Column(name="is_active", type="boolean")
      */
-    private $isActive;
+    protected $isActive;
 
     /**
      * @var \DateTime $lastLogin
      *
      * @ORM\Column(name="last_login", type="datetime", nullable=true)
      */
-    private $lastLogin;
+    protected $lastLogin;
 
     /**
      * @var string $confirmationToken
      *
      * @ORM\Column(name="confirmation_token", type="string", length=255, nullable=true)
      */
-    private $confirmationToken;
+    protected $confirmationToken;
 
     /**
      * @var array $roles
      *
      * @ORM\Column(name="roles", type="array")
      */
-    private $roles;
+    protected $roles;
 
     /**
      *
      * @var string 
      * @Assert\NotBlank(groups={"Registration"})
-     * @Assert\MinLength(limit=5, message="user.password.minlength")
+     * @Assert\Length(min=5, minMessage="user.password.minlength")
      */
-    private $plainPassword;
+    protected $plainPassword;
 
     public function __construct() {
         $this->salt     = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
@@ -399,4 +393,6 @@ class User implements AdvancedUserInterface, \Serializable, EquatableInterface {
     public function getGroups() {
         return array();
     }
+    
+    
 }

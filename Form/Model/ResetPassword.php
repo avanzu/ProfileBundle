@@ -28,7 +28,7 @@ class ResetPassword {
      * 
      * @return string
      * @Assert\NotBlank()
-     * @Assert\MinLength(limit=6, message="user.password.minlength")
+     * @Assert\Length(min=6, minMessage="user.password.minlength")
      */
     public function getNewPassword() {
         return $this->user->getPlainPassword();

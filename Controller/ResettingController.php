@@ -17,7 +17,7 @@ use Avanzu\ProfileBundle\Form\Model\ResetPassword;
 class ResettingController extends Controller {
 
     /**
-     * @Route("/", name="reset_index")
+     * @Route("/reset-password", name="reset_index")
      * @Template("")
      */
     public function indexAction(Request $request) {
